@@ -1,0 +1,355 @@
+
+<!doctype html>
+<html lang="en">
+
+    <head>
+        
+        <meta charset="utf-8" />
+        <title>FORM</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/dolero8logo.png">
+        
+        <!-- twitter-bootstrap-wizard css -->
+        <link rel="stylesheet" href="assets/libs/twitter-bootstrap-wizard/prettify.css">
+
+        <!-- Bootstrap Css -->
+        <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-topbar="dark">
+    
+    <!-- <body data-layout="horizontal" data-topbar="dark"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+            <header id="page-topbar">
+                <div class="navbar-header">
+                <a href="\" class="logo d-flex align-items-center">
+                <h1>DOLE<span> VIII</span></h1>
+                <a id="date"></a>
+            </a>
+                </div>
+            </header>
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div>
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0">Application Form</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div id="progrss-wizard" class="twitter-bs-wizard">
+                                            <ul class="twitter-bs-wizard-nav nav-justified">
+                                                <li class="nav-item">
+                                                    <a href="#progress-seller-details" class="nav-link" data-toggle="tab">
+                                                        <span class="step-number">01</span>
+                                                        <span class="step-title">Basic Information</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="#progress-company-document" class="nav-link" data-toggle="tab">
+                                                        <span class="step-number">02</span>
+                                                        <span class="step-title">Education</span>
+                                                    </a>
+                                                </li>
+
+                                                <li class="nav-item">
+                                                    <a href="#progress-bank-detail" class="nav-link" data-toggle="tab">
+                                                        <span class="step-number">03</span>
+                                                        <span class="step-title">Skills & Experience</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+
+                                            <div id="bar" class="mt-4 progress">
+                                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"></div>
+                                            </div>
+                                            <div class="tab-content twitter-bs-wizard-tab-content">
+                                                <div class="tab-pane" id="progress-seller-details">
+
+                                                    <form action="/create" method="POST">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+
+                                                                    <label class="form-label" for="progress-basicpill-firstname-input">Applying for</label>
+                                                                    <select class="form-select">
+                                                                        <option text="center" value="">-----------------------------------------------</option>
+                                                                        <?php
+                                                                        
+                                                                        $host = '127.0.0.1';
+                                                                        $user = 'root';
+                                                                        $password = '';
+                                                                        $dbname = 'dole-hrms';
+
+                                                                        $conn = new mysqli($host,$user,$password,$dbname);
+                                                                        $sql = 'SELECT * FROM applications';
+                                                                        $result = mysqli_query($conn, $sql);
+                                                                        $data = array();
+
+                                                                        while ($row = mysqli_fetch_assoc($result)){
+                                                                            $data[] = $row;
+                                                                        }
+
+                                                                        foreach ($data as $row) {
+                                                                            echo "<option value=\"" . $row['id'] . "\">" . $row['name'] . "</option>";
+                                                                        }
+                                                                        mysqli_close($conn);
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="progress-basicpill-firstname-input">First Name</label>
+                                                                    <input type="text" class="form-control" id="progress-basicpill-firstname-input" name="first_name">
+                                                                </div>
+                                                            </div>
+                                                             <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="progress-basicpill-firstname-input">Middle Name</label>
+                                                                    <input type="text" class="form-control" id="progress-basicpill-firstname-input" name="middle_name">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="progress-basicpill-lastname-input">Last Name</label>
+                                                                    <input type="text" class="form-control" id="progress-basicpill-lastname-input" name="last_name">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="progress-basicpill-lastname-input">Sex</label>
+                                                                    <select name="sex" class="form-select">
+                                                                        <option value="">-----------------------------------------------</option>
+                                                                        <option value="male">Male</option>
+                                                                        <option value="female">Female</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="progress-basicpill-phoneno-input">Phone</label>
+                                                                    <input type="text" class="form-control" id="progress-basicpill-phoneno-input" name="phone">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="progress-basicpill-email-input">Email</label>
+                                                                    <input type="email" class="form-control" id="progress-basicpill-email-input" name="email">
+                                                                </div>
+                                                            </div>
+                                                              <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="progress-basicpill-address-input">Address</label>
+                                                                    <input class="form-control" id="progress-basicpill-address-input" name="address">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button a data-aos="fade-up" data-aos-delay="200" class="btn-1">Submit</button>
+                                                    </form>
+
+                                                </div>
+                                                <div class="tab-pane" id="progress-company-document">
+                                                  <div>
+                                                    <form>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="progress-basicpill-pancard-input">Text Label</label>
+                                                                    <input type="text" class="form-control" id="progress-basicpill-pancard-input">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="progress-basicpill-vatno-input">Text Label</label>
+                                                                    <input type="text" class="form-control" id="progress-basicpill-vatno-input">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="progress-basicpill-cstno-input">Text Label</label>
+                                                                    <input type="text" class="form-control" id="progress-basicpill-cstno-input">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="progress-basicpill-servicetax-input">Text Label</label>
+                                                                    <input type="text" class="form-control" id="progress-basicpill-servicetax-input">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="progress-basicpill-companyuin-input">Text Label</label>
+                                                                    <input type="text" class="form-control" id="progress-basicpill-companyuin-input">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="progress-basicpill-declaration-input">Text Label</label>
+                                                                    <input type="text" class="form-control" id="progress-basicpill-declaration-input">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                  </div>
+                                                </div>
+                                                <div class="tab-pane" id="progress-bank-detail">
+                                                    <div>
+                                                      <form>
+                                                          <div class="row">
+                                                              <div class="col-lg-6">
+                                                                  <div class="mb-3">
+                                                                      <label class="form-label" for="progress-basicpill-namecard-input">Text Label</label>
+                                                                      <input type="text" class="form-control" id="progress-basicpill-namecard-input">
+                                                                  </div>
+                                                              </div>
+  
+                                                              <div class="col-lg-6">
+                                                                  <div class="mb-3">
+                                                                      <label>Credit Card Type</label>
+                                                                      <select class="form-select">
+                                                                            <option selected>Select Card Type</option>
+                                                                            <option value="AE">American Express</option>
+                                                                            <option value="VI">Visa</option>
+                                                                            <option value="MC">MasterCard</option>
+                                                                            <option value="DI">Discover</option>
+                                                                      </select>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                          <div class="row">
+                                                              <div class="col-lg-6">
+                                                                  <div class="mb-3">
+                                                                      <label class="form-label" for="progress-basicpill-cardno-input">Text Label</label>
+                                                                      <input type="text" class="form-control" id="progress-basicpill-cardno-input">
+                                                                  </div>
+                                                              </div>
+  
+                                                              <div class="col-lg-6">
+                                                                  <div class="mb-3">
+                                                                      <label class="form-label" for="progress-basicpill-card-verification-input">Text Label</label>
+                                                                      <input type="text" class="form-control" id="progress-basicpill-card-verification-input">
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                          <div class="row">
+                                                              <div class="col-lg-6">
+                                                                  <div class="mb-3">
+                                                                      <label class="form-label" for="progress-basicpill-expiration-input">Text Label</label>
+                                                                      <input type="text" class="form-control" id="progress-basicpill-expiration-input">
+                                                                  </div>
+                                                              </div>
+  
+                                                          </div>
+                                                      </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                                <li class="previous"><a href="javascript: void(0);">Previous</a></li>
+                                                <li class="next"><a href="javascript: void(0);">Next</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                        
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+                
+
+
+                {{-- <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <script>document.write(new Date().getFullYear())</script> © Upcube.
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="text-sm-end d-none d-sm-block">
+                                    Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer> --}}
+                
+                
+
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+        <!-- JAVASCRIPT -->
+        <script src="assets/libs/jquery/jquery.min.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
+
+        <!-- twitter-bootstrap-wizard js -->
+        <script src="assets/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+
+        <script src="assets/libs/twitter-bootstrap-wizard/prettify.js"></script>
+
+        <!-- form wizard init -->
+        <script src="assets/js/pages/form-wizard.init.js"></script>
+
+        <script src="assets/js/app.js"></script>
+
+        <script>
+            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+            function updateTime() {
+                var currentDate = new Date();
+                var monthName = months[currentDate.getMonth()];
+                var day = currentDate.getDate();
+                var year = currentDate.getFullYear();
+                var time = currentDate.toLocaleTimeString();
+                var dateTimeString = monthName + ' ' + day + ', ' + year + ' | ' + time;
+                document.getElementById('date').innerHTML = dateTimeString;
+            }
+            // Call updateTime every second
+            setInterval(updateTime, 1000);
+        </script>
+
+    </body>
+</html>
